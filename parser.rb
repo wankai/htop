@@ -23,10 +23,10 @@ end
 class HtopParser < Binp::Parser
   def initialize
     # assume reboot's opcode is 0x61
-    reboot = Binp::Bits.new("01100001") { |code| Reboot.new(code) }
+    reboot = Binp::Bytes.new(0x61) { |code| Reboot.new(code) }
 
     # assume query_info's opcode is 0x62
-    query_info = Binp::Bits.new("01100010") { |code| QueryInfo.new(code) }
+    query_info = Binp::Bytes.new(0x62) { |code| QueryInfo.new(code) }
 
     # assume cpu support only the two opcode now
     @program = reboot | query_info
